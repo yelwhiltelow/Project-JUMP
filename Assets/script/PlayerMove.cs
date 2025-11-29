@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    bool isjump;
 
     void Awake() {
         rigid = GetComponent<Rigidbody2D>();
@@ -16,13 +17,15 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
 
         rigid.freezeRotation = true;    //이동시 굴러가기 방지
+        isjump = false;
     }
 
     void Update() {
         //점프
-        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) {    //스페이스바, 점프 애니메이션이 작동중이지 않다면
+        if (Input.GetButtonDown("Jump") && !isjump/* && !anim.GetBool("isJumping")*/) {    //스페이스바, 점프 애니메이션이 작동중이지 않다면
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);    //Jump 애니메이션 추가
+            isjump = true;
         }
 
         //멈출 때 속도
@@ -45,7 +48,7 @@ public class PlayerMove : MonoBehaviour
     void FixedUpdate() {
         float h = Input.GetAxisRaw("Horizontal");       //좌,우 A, D
 
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        rigid.AddForce(Vector2.right * h * 100, ForceMode2D.Impulse);
 
         //오른쪽 속도 조절
         if (rigid.linearVelocity.x > maxSpeed)    //velocity : 리지드바디의 현재 속도
@@ -60,7 +63,10 @@ public class PlayerMove : MonoBehaviour
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform")); //레이에 닿는 물체
             if (rayHit.collider != null) //레이에 닿는 물체가 있다면
                 if (rayHit.distance < 0.5f)
+                {
                     anim.SetBool("isJumping", false);
+                    isjump = false;
+                }
         }
     }
 }

@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class FinalPlatform : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
-            return;
-
-        // 위에서 내려와서 착지했을 때만
-        if (collision.relativeVelocity.y <= 0f)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            GameEndManager manager = FindAnyObjectByType<GameEndManager>();
-            if (manager != null)
-                manager.EndGame();
+            // 위에서 밟았을 때만 작동
+            if (collision.contacts[0].normal.y < -0.5f)
+            {
+                GameEndManager manager = FindAnyObjectByType<GameEndManager>();
+                if (manager != null)
+                    manager.EndGame();
+            }
         }
     }
 }

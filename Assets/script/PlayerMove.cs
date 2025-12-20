@@ -5,27 +5,28 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 6f;
     public float jumpPower = 12f;
 
+    [Header("Ice Settings")]
+    public float iceAcceleration = 30f;
+    public float iceMaxSpeed = 6f;
+
     Rigidbody2D rigid;
 
     bool isGrounded;
+    bool onIce;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-
         rigid.freezeRotation = true;
     }
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-
         // 점프
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            rigid.linearVelocity = new Vector2(rigid.linearVelocity.x, 0); // 점프 안정화
+            rigid.linearVelocity = new Vector2(rigid.linearVelocity.x, 0f);
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-
             isGrounded = false;
         }
     }
@@ -34,41 +35,50 @@ public class PlayerMove : MonoBehaviour
     {
         float h = Input.GetAxisRaw("Horizontal");
 
-        // Jump King 스타일 이동 (velocity 직접 제어)
-        rigid.linearVelocity = new Vector2(h * moveSpeed, rigid.linearVelocity.y);
+        if (onIce)
+        {
+            // ❄️ 얼음: 관성 이동
+            rigid.AddForce(Vector2.right * h * iceAcceleration);
+
+            // 최대 속도 제한
+            if (Mathf.Abs(rigid.linearVelocity.x) > iceMaxSpeed)
+            {
+                rigid.linearVelocity = new Vector2(
+                    Mathf.Sign(rigid.linearVelocity.x) * iceMaxSpeed,
+                    rigid.linearVelocity.y
+                );
+            }
+        }
+        else
+        {
+            // 🟫 일반 바닥: 즉각 반응
+            rigid.linearVelocity = new Vector2(h * moveSpeed, rigid.linearVelocity.y);
+        }
     }
 
-    // ⭐ 착지 판정
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Platform"))
-            return;
-
-        foreach (ContactPoint2D contact in collision.contacts)
+        // 바닥 판정
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ice"))
         {
-            // 위에서 밟았을 때만 착지
-            if (contact.normal.y > 0.7f)
+            foreach (ContactPoint2D contact in collision.contacts)
             {
-                isGrounded = true;
-                break;
+                if (contact.normal.y > 0.7f)
+                {
+                    isGrounded = true;
+                    onIce = collision.gameObject.CompareTag("Ice");
+                    return;
+                }
             }
         }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
-{
-    if (!collision.gameObject.CompareTag("Platform"))
-        return;
-
-    foreach (ContactPoint2D contact in collision.contacts)
+    void OnCollisionExit2D(Collision2D collision)
     {
-        if (contact.normal.y > 0.7f)
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ice"))
         {
-            isGrounded = true;
-            return;
+            isGrounded = false;
+            onIce = false;
         }
     }
-
-    isGrounded = false;
-}
 }

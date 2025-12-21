@@ -14,6 +14,9 @@ public class PlayerMove : MonoBehaviour
     bool isGrounded;
     bool onIce;
 
+    // ⭐ 스턴 상태
+    bool isStunned;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
@@ -22,6 +25,10 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        // ⛔ 스턴 중에는 점프 입력 차단
+        if (isStunned)
+            return;
+
         // 점프
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -33,6 +40,10 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
+        // ⛔ 스턴 중에는 이동 입력 차단 (중력은 Rigidbody가 처리)
+        if (isStunned)
+            return;
+
         float h = Input.GetAxisRaw("Horizontal");
 
         if (onIce)
@@ -58,7 +69,7 @@ public class PlayerMove : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 바닥 판정
+        // 바닥 판정 (Platform / Ice 공통)
         if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ice"))
         {
             foreach (ContactPoint2D contact in collision.contacts)
@@ -79,6 +90,20 @@ public class PlayerMove : MonoBehaviour
         {
             isGrounded = false;
             onIce = false;
+        }
+    }
+
+    // =========================
+    // ⭐ 외부(스턴 시스템)에서 호출
+    // =========================
+    public void SetStun(bool value)
+    {
+        isStunned = value;
+
+        // 스턴 걸릴 때 가로 속도 제거 (미끄러지다 멈추는 거 방지)
+        if (isStunned)
+        {
+            rigid.linearVelocity = new Vector2(0f, rigid.linearVelocity.y);
         }
     }
 }

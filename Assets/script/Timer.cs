@@ -1,33 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Timer : MonoBehaviour
 {
     [SerializeField] private TMP_Text text;
 
-    [SerializeField] private float time;
-    [SerializeField] private float curTime;
+    float curTime;
 
     int minute;
     int second;
+    int millisecond;
+
+    bool isRunning = false;
 
     private void Awake()
     {
-        StartCoroutine(StartTimer());
+        curTime = 0f;
+        UpdateText();
     }
 
-    IEnumerator StartTimer()
+    void Update()
     {
-        curTime = time;
-        while(true) {
-            curTime += Time.deltaTime;
-            minute = (int)curTime / 60;
-            second = (int)curTime % 60;
-            text.text = minute.ToString("00") + ":" + second.ToString("00");
-            yield return null;
+        // 아직 시작 안 했을 때: 플레이어 입력 감지
+        if (!isRunning)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0 ||
+                Input.GetButtonDown("Jump"))
+            {
+                isRunning = true;
+            }
+            else
+            {
+                return;
+            }
         }
+
+        // 타이머 진행
+        curTime += Time.deltaTime;
+        UpdateText();
+    }
+
+    void UpdateText()
+    {
+        minute = (int)(curTime / 60);
+        second = (int)(curTime % 60);
+
+        // 1/100초 단위 (00 ~ 99)
+        millisecond = (int)((curTime * 100) % 100);
+
+        text.text =
+            minute.ToString("00") + ":" +
+            second.ToString("00") + "." +
+            millisecond.ToString("00");
+    }
+    
+    public float GetCurrentTime()
+    {
+        return curTime;
     }
 }

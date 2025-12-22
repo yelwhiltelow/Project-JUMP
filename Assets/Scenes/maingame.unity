@@ -531,7 +531,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1987926943}
-  - {fileID: 1575697357}
   m_Father: {fileID: 1080791108}
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1282,19 +1281,11 @@ Transform:
   m_GameObject: {fileID: 1575697356}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-<<<<<<< Updated upstream
-  m_LocalPosition: {x: 46.350098, y: -20.750015, z: -255.25}
-  m_LocalScale: {x: 20, y: 20, z: 56.72222}
+  m_LocalPosition: {x: 46.349976, y: -19.749985, z: -255.25002}
+  m_LocalScale: {x: 20, y: 20, z: 56.72223}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1987926943}
-=======
-  m_LocalPosition: {x: -364.7, y: 214, z: -255.25}
-  m_LocalScale: {x: 20, y: 20, z: 56.72222}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 1038068490}
->>>>>>> Stashed changes
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1575697358
 SpriteRenderer:
@@ -2176,11 +2167,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-<<<<<<< Updated upstream
-  m_AnchoredPosition: {x: 71.19989, y: -20.49997}
-=======
   m_AnchoredPosition: {x: 71.20001, y: -20.5}
->>>>>>> Stashed changes
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1987926944
@@ -2220,8 +2207,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

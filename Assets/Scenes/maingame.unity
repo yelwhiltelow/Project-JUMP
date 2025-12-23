@@ -5340,7 +5340,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 707533303}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.621}
 --- !u!61 &1732713049
 BoxCollider2D:
   m_ObjectHideFlags: 0

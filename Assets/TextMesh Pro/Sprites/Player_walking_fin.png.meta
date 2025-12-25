@@ -1,22 +1,22 @@
 fileFormatVersion: 2
-guid: bbbe2ae081920054e8a540a4b4b3ee3b
+guid: 9f7f4552a113b4a95a230a4d60f71465
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -47306867891107369
-    second: Player_Walking_image_0
+      213: -2925426248675802558
+    second: Player_walking_fin_0
   - first:
-      213: -4023056669894942117
-    second: Player_Walking_image_1
+      213: 2100432473303573232
+    second: Player_walking_fin_1
   - first:
-      213: 4868773832146536854
-    second: Player_Walking_image_2
+      213: -4277757704732826152
+    second: Player_walking_fin_2
   - first:
-      213: 2289899968214190249
-    second: Player_Walking_image_3
+      213: 4858542095552556363
+    second: Player_walking_fin_3
   - first:
-      213: 8381131674208455003
-    second: Player_Walking_image_4
+      213: -8040462024505125656
+    second: Player_walking_fin_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,111 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Walking_image_0
+      name: Player_walking_fin_0
       rect:
         serializedVersion: 2
-        x: 332
-        y: 269
-        width: 236
-        height: 587
+        x: 37
+        y: 30
+        width: 27
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7d90aef77aee75ff0800000000000000
-      internalID: -47306867891107369
+      spriteID: 242431f835cc667d0800000000000000
+      internalID: -2925426248675802558
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walking_image_1
+      name: Player_walking_fin_1
       rect:
         serializedVersion: 2
-        x: 1223
-        y: 269
-        width: 245
-        height: 587
+        x: 136
+        y: 30
+        width: 27
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b5265a7164b3b28c0800000000000000
-      internalID: -4023056669894942117
+      spriteID: 0f264f5b43c362d10800000000000000
+      internalID: 2100432473303573232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walking_image_2
+      name: Player_walking_fin_2
       rect:
         serializedVersion: 2
-        x: 2132
-        y: 269
-        width: 236
-        height: 587
+        x: 237
+        y: 30
+        width: 27
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 699cfc4210c519340800000000000000
-      internalID: 4868773832146536854
+      spriteID: 8d5a536380a52a4c0800000000000000
+      internalID: -4277757704732826152
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walking_image_3
+      name: Player_walking_fin_3
       rect:
         serializedVersion: 2
-        x: 3023
-        y: 269
-        width: 245
-        height: 587
+        x: 336
+        y: 30
+        width: 27
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9a8c59083eb57cf10800000000000000
-      internalID: 2289899968214190249
+      spriteID: b4d21b35b420d6340800000000000000
+      internalID: 4858542095552556363
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Walking_image_4
+      name: Player_walking_fin_4
       rect:
         serializedVersion: 2
-        x: 3932
-        y: 269
-        width: 236
-        height: 587
+        x: 437
+        y: 30
+        width: 27
+        height: 65
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b5948f04ad2cf4470800000000000000
-      internalID: 8381131674208455003
+      spriteID: 8e49a5f836a8a6090800000000000000
+      internalID: -8040462024505125656
       vertices: []
       indices: 
       edges: []
@@ -225,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: da16ad08ef89f4ab3a3e1525f4529ab2
     internalID: 0
     vertices: []
     indices: 
@@ -235,11 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Player_Walking_image_0: -47306867891107369
-      Player_Walking_image_1: -4023056669894942117
-      Player_Walking_image_2: 4868773832146536854
-      Player_Walking_image_3: 2289899968214190249
-      Player_Walking_image_4: 8381131674208455003
+      Player_walking_fin_0: -2925426248675802558
+      Player_walking_fin_1: 2100432473303573232
+      Player_walking_fin_2: -4277757704732826152
+      Player_walking_fin_3: 4858542095552556363
+      Player_walking_fin_4: -8040462024505125656
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

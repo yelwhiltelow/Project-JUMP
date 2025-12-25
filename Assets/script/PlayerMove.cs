@@ -10,6 +10,7 @@ public class PlayerMove : MonoBehaviour
     public float iceMaxSpeed = 6f;
 
     Rigidbody2D rigid;
+    Animator anim;
 
     bool isGrounded;
     bool onIce;
@@ -21,13 +22,20 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         rigid.freezeRotation = true;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
+        // ⭐ Animator에 스턴 상태 전달 (매 프레임)
+        anim.SetBool("isStunned", isStunned);
+
         // ⛔ 스턴 중에는 점프 입력 차단
         if (isStunned)
+        {
+            anim.SetBool("isWalking", false);
             return;
+        }
 
         // 점프
         if (Input.GetButtonDown("Jump") && isGrounded)
@@ -45,6 +53,9 @@ public class PlayerMove : MonoBehaviour
             return;
 
         float h = Input.GetAxisRaw("Horizontal");
+
+        // ⭐ Animator에 이동 상태 전달 (입력 기준)
+        anim.SetBool("isWalking", h != 0);
 
         if (onIce)
         {
@@ -100,7 +111,7 @@ public class PlayerMove : MonoBehaviour
     {
         isStunned = value;
 
-        // 스턴 걸릴 때 가로 속도 제거 (미끄러지다 멈추는 거 방지)
+        // 스턴 걸릴 때 가로 속도 제거
         if (isStunned)
         {
             rigid.linearVelocity = new Vector2(0f, rigid.linearVelocity.y);

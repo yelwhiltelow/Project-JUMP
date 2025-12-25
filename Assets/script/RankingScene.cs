@@ -23,9 +23,9 @@ public class RankingScene : MonoBehaviour
         List<RankData> ranks = RankManager.GetRanks();
 
         // 상위 3위 고정 표시
-        SetTopRank(rank1Text, ranks, 0, 48);
-        SetTopRank(rank2Text, ranks, 1, 38);
-        SetTopRank(rank3Text, ranks, 2, 30);
+        SetTopRank(rank1Text, ranks, 0, 100);
+        SetTopRank(rank2Text, ranks, 1, 85);
+        SetTopRank(rank3Text, ranks, 2, 70);
 
         // 4위부터 Scroll View
         for (int i = 3; i < ranks.Count; i++)
@@ -33,7 +33,7 @@ public class RankingScene : MonoBehaviour
             TMP_Text item = Instantiate(rankItemPrefab, scrollContent);
             item.enableAutoSizing = false;
             item.overflowMode = TextOverflowModes.Overflow;
-            item.fontSize = 22;
+            item.fontSize = 45;
 
             item.text = FormatRankText(i, ranks[i]);
         }

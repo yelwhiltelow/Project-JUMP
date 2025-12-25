@@ -2322,8 +2322,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   moveSpeed: 20
   jumpPower: 150
-  iceAcceleration: 20
-  iceMaxSpeed: 15
+  iceAcceleration: 150
+  iceMaxSpeed: 200
 --- !u!61 &766470462
 BoxCollider2D:
   m_ObjectHideFlags: 0

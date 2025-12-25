@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
 
     Rigidbody2D rigid;
     Animator anim;
+    SpriteRenderer sr;   // ⭐ 추가
 
     bool isGrounded;
     bool onIce;
@@ -23,14 +24,14 @@ public class PlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         rigid.freezeRotation = true;
         anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();   // ⭐ 추가
     }
 
     void Update()
     {
-        // ⭐ Animator에 스턴 상태 전달 (매 프레임)
+        // Animator 스턴 상태 전달
         anim.SetBool("isStunned", isStunned);
 
-        // ⛔ 스턴 중에는 점프 입력 차단
         if (isStunned)
         {
             anim.SetBool("isWalking", false);
@@ -48,21 +49,24 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        // ⛔ 스턴 중에는 이동 입력 차단 (중력은 Rigidbody가 처리)
         if (isStunned)
             return;
 
         float h = Input.GetAxisRaw("Horizontal");
 
-        // ⭐ Animator에 이동 상태 전달 (입력 기준)
+        // ⭐ 이동 애니메이션
         anim.SetBool("isWalking", h != 0);
+
+        // ⭐ 방향 전환 (왼쪽 보면 뒤집기)
+        if (h != 0)
+        {
+            sr.flipX = h < 0;
+        }
 
         if (onIce)
         {
-            // ❄️ 얼음: 관성 이동
             rigid.AddForce(Vector2.right * h * iceAcceleration);
 
-            // 최대 속도 제한
             if (Mathf.Abs(rigid.linearVelocity.x) > iceMaxSpeed)
             {
                 rigid.linearVelocity = new Vector2(
@@ -73,33 +77,50 @@ public class PlayerMove : MonoBehaviour
         }
         else
         {
-            // 🟫 일반 바닥: 즉각 반응
             rigid.linearVelocity = new Vector2(h * moveSpeed, rigid.linearVelocity.y);
         }
     }
 
+    // 착지 판정
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // 바닥 판정 (Platform / Ice 공통)
-        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ice"))
+        if (!collision.gameObject.CompareTag("Platform") &&
+            !collision.gameObject.CompareTag("Ice"))
+            return;
+
+        foreach (ContactPoint2D contact in collision.contacts)
         {
-            foreach (ContactPoint2D contact in collision.contacts)
+            if (contact.normal.y > 0.7f)
             {
-                if (contact.normal.y > 0.7f)
-                {
-                    isGrounded = true;
-                    onIce = collision.gameObject.CompareTag("Ice");
-                    return;
-                }
+                isGrounded = true;
+                onIce = collision.gameObject.CompareTag("Ice");
+                return;
             }
         }
     }
 
+    // ⭐ 보정용
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Platform") &&
+            !collision.gameObject.CompareTag("Ice"))
+            return;
+
+        foreach (ContactPoint2D contact in collision.contacts)
+        {
+            if (contact.normal.y > 0.7f)
+            {
+                isGrounded = true;
+                return;
+            }
+        }
+    }
+
+    // Exit에서는 grounded를 끊지 않음
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("Ice"))
+        if (collision.gameObject.CompareTag("Ice"))
         {
-            isGrounded = false;
             onIce = false;
         }
     }
@@ -111,7 +132,6 @@ public class PlayerMove : MonoBehaviour
     {
         isStunned = value;
 
-        // 스턴 걸릴 때 가로 속도 제거
         if (isStunned)
         {
             rigid.linearVelocity = new Vector2(0f, rigid.linearVelocity.y);

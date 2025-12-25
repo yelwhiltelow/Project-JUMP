@@ -6156,7 +6156,7 @@ Transform:
   m_GameObject: {fileID: 1966430226}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.08, y: 110.78, z: 0}
+  m_LocalPosition: {x: 0.23, y: 49.84, z: 0}
   m_LocalScale: {x: 0.80172086, y: 0.723592, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -6203,8 +6203,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
   moveSpeed: 20
   jumpPower: 150
-  iceAcceleration: 20
-  iceMaxSpeed: 15
+  iceAcceleration: 150
+  iceMaxSpeed: 200
 --- !u!61 &1966430235
 BoxCollider2D:
   m_ObjectHideFlags: 0
